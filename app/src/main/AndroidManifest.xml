@@ -28,6 +28,17 @@
         <activity
             android:name=".ui.view.UpdateActivity"
             android:exported="true"/>
+        <activity
+            android:name=".ui.view.ShowOneActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.view.ShowActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 </manifest>

@@ -41,4 +41,14 @@ class UserViewModel @Inject constructor(
             fetchAllUsers() // Refresh the list of users after updating
         }
     }
+
+    fun getUserByName(name: String): LiveData<User?> {
+        val result = MutableLiveData<User?>()
+        viewModelScope.launch {
+            val user = userRepository.getUserByName(name)
+            result.postValue(user)
+        }
+        return result
+    }
+
 }
