@@ -50,5 +50,4 @@ class UserViewModel @Inject constructor(
         }
         return result
     }
-
 }

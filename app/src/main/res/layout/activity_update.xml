@@ -27,12 +27,32 @@
         android:layout_margin="16dp" />
 
     <EditText
-        android:id="@+id/etNewAge"
+        android:id="@+id/etNewFavChar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="New Age"
-        android:inputType="number"
+        android:hint="New Favorite Character"
         app:layout_constraintTop_toBottomOf="@+id/etNewName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etNewGenre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="New Genre"
+        app:layout_constraintTop_toBottomOf="@+id/etNewFavChar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etNewRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="New Rating"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@+id/etNewGenre"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="16dp" />
@@ -41,8 +61,8 @@
         android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update User"
-        app:layout_constraintTop_toBottomOf="@+id/etNewAge"
+        android:text="Update Anime"
+        app:layout_constraintTop_toBottomOf="@+id/etNewRating"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="16dp"

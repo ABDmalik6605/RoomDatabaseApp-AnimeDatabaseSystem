@@ -8,17 +8,19 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.ffan.roomdatabaseapp.R
-import com.ffan.roomdatabaseapp.data.local.entities.User
-import com.ffan.roomdatabaseapp.ui.viewmodel.UserViewModel
+import com.ffan.roomdatabaseapp.data.local.entities.Anime
+import com.ffan.roomdatabaseapp.ui.viewmodel.AnimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class UpdateActivity : AppCompatActivity() {
 
-    private val userViewModel: UserViewModel by viewModels()
+    private val animeViewModel: AnimeViewModel by viewModels()
     private lateinit var etOldName: EditText
     private lateinit var etNewName: EditText
-    private lateinit var etNewAge: EditText
+    private lateinit var etNewFavChar: EditText
+    private lateinit var etNewGenre: EditText
+    private lateinit var etNewRating: EditText
     private lateinit var btnUpdate: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,32 +29,45 @@ class UpdateActivity : AppCompatActivity() {
 
         etOldName = findViewById(R.id.etOldName)
         etNewName = findViewById(R.id.etNewName)
-        etNewAge = findViewById(R.id.etNewAge)
+        etNewFavChar = findViewById(R.id.etNewFavChar)
+        etNewGenre = findViewById(R.id.etNewGenre)
+        etNewRating = findViewById(R.id.etNewRating)
         btnUpdate = findViewById(R.id.btnUpdate)
 
         btnUpdate.setOnClickListener {
             val oldName = etOldName.text.toString()
             val newName = etNewName.text.toString()
-            val newAge = etNewAge.text.toString().toIntOrNull()
+            val newFavChar = etNewFavChar.text.toString()
+            val newGenre = etNewGenre.text.toString()
+            val newRating = etNewRating.text.toString().toFloatOrNull()
 
-            if (oldName.isNotEmpty() && newName.isNotEmpty() && newAge != null) {
-                updateUser(oldName, newName, newAge)
+            if (oldName.isNotEmpty()) {
+                updateAnime(oldName, newName, newFavChar, newGenre, newRating)
             } else {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter the old name", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun updateUser(oldName: String, newName: String, newAge: Int) {
-        userViewModel.allUsers.observe(this, Observer { users ->
-            val user = users.find { it.name == oldName }
-            if (user != null) {
-                val updatedUser = user.copy(name = newName, age = newAge)
-                userViewModel.updateUser(updatedUser)
-                Toast.makeText(this, "User updated", Toast.LENGTH_SHORT).show()
+    private fun updateAnime(oldName: String, newName: String, newFavChar: String, newGenre: String, newRating: Float?) {
+        animeViewModel.getAnimeByName(oldName).observe(this, Observer { animes ->
+            if (animes != null && animes.isNotEmpty()) {
+                val updatedAnimes = animes.map { anime ->
+                    anime.copy(
+                        name = if (newName.isNotEmpty()) newName else anime.name,
+                        favChar = if (newFavChar.isNotEmpty()) newFavChar else anime.favChar,
+                        genre = if (newGenre.isNotEmpty()) newGenre else anime.genre,
+                        rating = newRating ?: anime.rating
+                    )
+                }
+                // Assuming you have a method to update a list of Anime
+                updatedAnimes.forEach { updatedAnime ->
+                    animeViewModel.updateAnime(updatedAnime)
+                }
+                Toast.makeText(this, "Anime(s) updated", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Anime not found", Toast.LENGTH_SHORT).show()
             }
         })
     }

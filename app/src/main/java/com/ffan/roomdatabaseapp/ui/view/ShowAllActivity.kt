@@ -7,14 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ffan.roomdatabaseapp.R
 import com.ffan.roomdatabaseapp.adapter.ListRecyclerViewAdapter
+import com.ffan.roomdatabaseapp.data.local.entities.Anime
+import com.ffan.roomdatabaseapp.ui.viewmodel.AnimeViewModel
 import com.ffan.roomdatabaseapp.ui.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ShowAllActivity : AppCompatActivity() {
 
-    private val userViewModel: UserViewModel by viewModels()
-    private lateinit var userAdapter: ListRecyclerViewAdapter
+    private val animeViewModel: AnimeViewModel by viewModels()
+    private lateinit var animeAdapter: ListRecyclerViewAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,14 +25,17 @@ class ShowAllActivity : AppCompatActivity() {
 
         // Initialize the RecyclerView
         recyclerView = findViewById(R.id.recyclerView)
-        userAdapter = ListRecyclerViewAdapter()
+        animeAdapter = ListRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = userAdapter
+        recyclerView.adapter = animeAdapter
+
+//        val anime = Anime(name = "Death Note", favChar = "Light Yagami", genre = "Suspense", rating = 5f)
+//        animeViewModel.insertAnime(anime)
 
         // Observe LiveData
-        userViewModel.allUsers.observe(this) { users ->
-            users?.let {
-                userAdapter.setUsers(it)
+        animeViewModel.allAnimes.observe(this) { animes ->
+            animes?.let {
+                animeAdapter.setAnimes(it)
             }
         }
     }
