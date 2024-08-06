@@ -14,7 +14,10 @@ class AnimeRepository(private val AnimeDao: AnimeDao) {
     suspend fun getAllAnimes(): List<Anime> {
         return AnimeDao.getAllAnimes()
     }
-    suspend fun getAnimeByName(name: String): List <Anime> {
+    suspend fun getAnimesByName(name: String): List <Anime> {
         return AnimeDao.getAnimesByName(name)
+    }
+    suspend fun getAnimeByName(name: String):  Anime? {
+        return AnimeDao.getAnimeByName(name)
     }
 }

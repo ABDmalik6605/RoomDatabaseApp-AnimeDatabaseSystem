@@ -20,4 +20,7 @@ interface AnimeDao {
 
     @Query("SELECT * FROM animes WHERE name LIKE '%' || :animeName || '%'")
     suspend fun getAnimesByName(animeName: String): List<Anime>
+
+    @Query("SELECT * FROM animes WHERE name= :animeName LIMIT 1")
+    suspend fun getAnimeByName(animeName: String): Anime?
 }

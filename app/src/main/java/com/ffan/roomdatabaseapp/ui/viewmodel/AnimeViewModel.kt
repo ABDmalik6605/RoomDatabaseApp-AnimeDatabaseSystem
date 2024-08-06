@@ -42,13 +42,21 @@ class AnimeViewModel @Inject constructor(
         }
     }
 
-    fun getAnimeByName(name: String): LiveData<List<Anime>> {
+    fun getAnimesByName(name: String): LiveData<List<Anime>> {
         val result = MutableLiveData<List<Anime>>()
         viewModelScope.launch {
-            val animes = animeRepository.getAnimeByName(name)
+            val animes = animeRepository.getAnimesByName(name)
             result.postValue(animes)
         }
         return result
     }
 
+    fun getAnimeByName(name: String): LiveData<Anime?> {
+        val result = MutableLiveData<Anime?>()
+        viewModelScope.launch {
+            val anime = animeRepository.getAnimeByName(name)
+            result.postValue(anime)
+        }
+        return result
+    }
 }

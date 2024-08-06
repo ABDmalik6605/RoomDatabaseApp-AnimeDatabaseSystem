@@ -49,7 +49,7 @@ class ShowOneActivity : AppCompatActivity() {
     }
 
     private fun getAnime(animeName: String) {
-        animeViewModel.getAnimeByName(animeName).observe(this, Observer { animes ->
+        animeViewModel.getAnimesByName(animeName).observe(this, Observer { animes ->
             if (animes != null && animes.isNotEmpty()) {
                 adapter.setAnimes(animes)
             } else {

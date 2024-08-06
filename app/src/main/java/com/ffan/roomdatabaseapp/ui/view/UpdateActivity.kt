@@ -35,10 +35,10 @@ class UpdateActivity : AppCompatActivity() {
         btnUpdate = findViewById(R.id.btnUpdate)
 
         btnUpdate.setOnClickListener {
-            val oldName = etOldName.text.toString()
-            val newName = etNewName.text.toString()
-            val newFavChar = etNewFavChar.text.toString()
-            val newGenre = etNewGenre.text.toString()
+            val oldName = etOldName.text.toString().toLowerCase()
+            val newName = etNewName.text.toString().toLowerCase()
+            val newFavChar = etNewFavChar.text.toString().toLowerCase()
+            val newGenre = etNewGenre.text.toString().toLowerCase()
             val newRating = etNewRating.text.toString().toFloatOrNull()
 
             if (oldName.isNotEmpty()) {
@@ -50,21 +50,16 @@ class UpdateActivity : AppCompatActivity() {
     }
 
     private fun updateAnime(oldName: String, newName: String, newFavChar: String, newGenre: String, newRating: Float?) {
-        animeViewModel.getAnimeByName(oldName).observe(this, Observer { animes ->
-            if (animes != null && animes.isNotEmpty()) {
-                val updatedAnimes = animes.map { anime ->
-                    anime.copy(
-                        name = if (newName.isNotEmpty()) newName else anime.name,
-                        favChar = if (newFavChar.isNotEmpty()) newFavChar else anime.favChar,
-                        genre = if (newGenre.isNotEmpty()) newGenre else anime.genre,
-                        rating = newRating ?: anime.rating
-                    )
-                }
-                // Assuming you have a method to update a list of Anime
-                updatedAnimes.forEach { updatedAnime ->
-                    animeViewModel.updateAnime(updatedAnime)
-                }
-                Toast.makeText(this, "Anime(s) updated", Toast.LENGTH_SHORT).show()
+        animeViewModel.getAnimeByName(oldName).observe(this, Observer { anime ->
+            if (anime != null) {
+                val updatedAnime = anime.copy(
+                    name = if (newName.isNotEmpty()) newName else anime.name,
+                    favChar = if (newFavChar.isNotEmpty()) newFavChar else anime.favChar,
+                    genre = if (newGenre.isNotEmpty()) newGenre else anime.genre,
+                    rating = newRating ?: anime.rating
+                )
+                animeViewModel.updateAnime(updatedAnime)
+                Toast.makeText(this, "Anime updated", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
                 Toast.makeText(this, "Anime not found", Toast.LENGTH_SHORT).show()
