@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.view.UpdateActivity">
+    tools:context=".ui.view.InsertActivity">
 
     <EditText
-        android:id="@+id/etOldName"
+        android:id="@+id/etName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Old Name"
+        android:hint="Name"
+
         android:textColorHint="@color/white"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,60 +21,49 @@
         android:layout_margin="16dp" />
 
     <EditText
-        android:id="@+id/etNewName"
+        android:id="@+id/etFavChar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="New Name"
+        android:hint="Favorite Character"
+
         android:textColorHint="@color/white"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/etOldName"
+        app:layout_constraintTop_toBottomOf="@+id/etName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="16dp" />
 
     <EditText
-        android:id="@+id/etNewFavChar"
+        android:id="@+id/etGenre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="New Favorite Character"
+        android:hint="Genre"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/etNewName"
+        app:layout_constraintTop_toBottomOf="@+id/etFavChar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="16dp" />
 
     <EditText
-        android:id="@+id/etNewGenre"
+        android:id="@+id/etRating"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="New Genre"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/etNewFavChar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="16dp" />
-
-    <EditText
-        android:id="@+id/etNewRating"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="New Rating"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
+        android:hint="Rating"
         android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@+id/etNewGenre"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/etGenre"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="16dp" />
 
     <Button
-        android:id="@+id/btnUpdate"
+        android:id="@+id/btnInsert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update Anime"
-        app:layout_constraintTop_toBottomOf="@+id/etNewRating"
+        android:text="Insert Anime"
+        app:layout_constraintTop_toBottomOf="@+id/etRating"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="16dp"

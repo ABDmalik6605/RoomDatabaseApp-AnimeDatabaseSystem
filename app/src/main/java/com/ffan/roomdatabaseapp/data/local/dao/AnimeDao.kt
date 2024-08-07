@@ -1,6 +1,7 @@
 package com.ffan.roomdatabaseapp.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -23,4 +24,7 @@ interface AnimeDao {
 
     @Query("SELECT * FROM animes WHERE name= :animeName LIMIT 1")
     suspend fun getAnimeByName(animeName: String): Anime?
+
+    @Delete
+    suspend fun deleteAnime(anime: Anime)
 }

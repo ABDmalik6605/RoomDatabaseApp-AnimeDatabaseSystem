@@ -1,6 +1,9 @@
 package com.ffan.roomdatabaseapp.ui.view
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -34,11 +37,37 @@ class UpdateActivity : AppCompatActivity() {
         etNewRating = findViewById(R.id.etNewRating)
         btnUpdate = findViewById(R.id.btnUpdate)
 
+        etNewRating.filters = arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
+            try {
+                val input = (dest.toString() + source.toString()).toFloat()
+                if (input in 0.0..5.0) {
+                    null
+                } else {
+                    ""
+                }
+            } catch (e: NumberFormatException) {
+                ""
+            }
+        })
+
+        etNewRating.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val input = s.toString().toFloatOrNull()
+                if (input != null && (input < 0.0 || input > 5.0)) {
+                    etNewRating.error = "Rating must be between 0 and 5"
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
         btnUpdate.setOnClickListener {
-            val oldName = etOldName.text.toString().toLowerCase()
-            val newName = etNewName.text.toString().toLowerCase()
-            val newFavChar = etNewFavChar.text.toString().toLowerCase()
-            val newGenre = etNewGenre.text.toString().toLowerCase()
+            val oldName = etOldName.text.toString()
+            val newName = etNewName.text.toString()
+            val newFavChar = etNewFavChar.text.toString()
+            val newGenre = etNewGenre.text.toString()
             val newRating = etNewRating.text.toString().toFloatOrNull()
 
             if (oldName.isNotEmpty()) {

@@ -20,4 +20,7 @@ class AnimeRepository(private val AnimeDao: AnimeDao) {
     suspend fun getAnimeByName(name: String):  Anime? {
         return AnimeDao.getAnimeByName(name)
     }
+    suspend fun deleteAnime(anime: Anime) {
+        AnimeDao.deleteAnime(anime)
+    }
 }

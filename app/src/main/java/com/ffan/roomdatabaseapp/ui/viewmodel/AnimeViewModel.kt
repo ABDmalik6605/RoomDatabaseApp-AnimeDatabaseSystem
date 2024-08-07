@@ -41,7 +41,12 @@ class AnimeViewModel @Inject constructor(
             fetchAllAnimes() // Refresh the list of users after updating
         }
     }
-
+    fun deleteAnime(anime: Anime) {
+        viewModelScope.launch {
+            animeRepository.deleteAnime(anime)
+            fetchAllAnimes() // Refresh the list of users after updating
+        }
+    }
     fun getAnimesByName(name: String): LiveData<List<Anime>> {
         val result = MutableLiveData<List<Anime>>()
         viewModelScope.launch {

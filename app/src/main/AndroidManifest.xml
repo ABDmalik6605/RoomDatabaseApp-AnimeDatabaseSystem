@@ -32,7 +32,13 @@
             android:name=".ui.view.ShowOneActivity"
             android:exported="true"/>
         <activity
+            android:name=".ui.view.InsertActivity"
+            android:exported="true"/>
+        <activity
             android:name=".ui.view.ShowActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.view.DeleteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

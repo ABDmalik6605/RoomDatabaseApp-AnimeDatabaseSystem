@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var getDataButton: Button
     private lateinit var getUpdateButton: Button
+    private lateinit var getInsertButton: Button
+    private lateinit var getDeleteButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
     private fun initUI(){
         getDataButton = findViewById(R.id.Get)
         getUpdateButton = findViewById(R.id.Update)
+        getInsertButton = findViewById(R.id.insert)
+        getDeleteButton = findViewById(R.id.Delete)
     }
     private fun setListeners(){
         getDataButton.setOnClickListener {
@@ -40,6 +44,14 @@ class MainActivity : AppCompatActivity() {
         }
         getUpdateButton.setOnClickListener{
             val intent =Intent(this,UpdateActivity::class.java)
+            startActivity(intent)
+        }
+        getInsertButton.setOnClickListener{
+            val intent =Intent(this,InsertActivity::class.java)
+            startActivity(intent)
+        }
+        getDeleteButton.setOnClickListener {
+            val intent =Intent(this,DeleteActivity::class.java)
             startActivity(intent)
         }
     }
