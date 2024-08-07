@@ -35,10 +35,10 @@ class UpdateActivity : AppCompatActivity() {
         btnUpdate = findViewById(R.id.btnUpdate)
 
         btnUpdate.setOnClickListener {
-            val oldName = etOldName.text.toString().toLowerCase()
-            val newName = etNewName.text.toString().toLowerCase()
-            val newFavChar = etNewFavChar.text.toString().toLowerCase()
-            val newGenre = etNewGenre.text.toString().toLowerCase()
+            val oldName = etOldName.text.toString()
+            val newName = etNewName.text.toString()
+            val newFavChar = etNewFavChar.text.toString()
+            val newGenre = etNewGenre.text.toString()
             val newRating = etNewRating.text.toString().toFloatOrNull()
 
             if (oldName.isNotEmpty()) {
